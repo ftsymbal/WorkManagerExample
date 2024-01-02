@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             val myWorkRequest: PeriodicWorkRequest =
                 PeriodicWorkRequestBuilder<MyWorker>(
                     15, TimeUnit.MINUTES,
-                    9, TimeUnit.MINUTES
+                 //   9, TimeUnit.MINUTES
                 ).build()
             WorkManager.getInstance(this)
                 .enqueueUniquePeriodicWork(
