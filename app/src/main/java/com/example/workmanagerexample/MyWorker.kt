@@ -1,24 +1,29 @@
 package com.example.workmanagerexample
 
 import android.content.Context
-import android.util.Log
+import android.widget.Toast
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 class MyWorker(appContext: Context, workerParams: WorkerParameters):
     CoroutineWorker(appContext, workerParams) {
     override suspend fun doWork(): Result {
+        withContext(Dispatchers.Main) {
+            val toast = Toast.makeText(applicationContext, "Started Work", Toast.LENGTH_SHORT)
+            toast.show()
+        }
 
         // Emulate 10 second work
-        Log.i(TAG, "Started Work")
         delay(10000)
-        Log.i(TAG, "Done some Work")
+
+        withContext(Dispatchers.Main) {
+            val toast = Toast.makeText(applicationContext, "Done some Work", Toast.LENGTH_SHORT)
+            toast.show()
+        }
 
         return Result.success()
-    }
-
-    companion object {
-        private const val TAG = "MyWorker"
     }
 }
